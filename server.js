@@ -9,15 +9,14 @@ const app = express();
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 
-// Routes
-const authRoute = require('./controllers/auth.js')
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(expressValidator());
 app.use(cookieParser());
 
+// Routes
+const authRoute = require('./controllers/auth.js')
 require('./data/db');
 
 var checkAuth = (req, res, next) => {
