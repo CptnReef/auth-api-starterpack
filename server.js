@@ -9,6 +9,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 
+// Routes
+const authRoute = require('./controllers/auth.js')
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -36,7 +39,10 @@ app.use(checkAuth);
 
 
 app.listen(3000, () => {
-    console.log('API listening on port http://localhost:3000!');
-  });
+  console.log('API listening on port http://localhost:3000!');
+  console.log('API listening on port https://superheroapi.com/api/108832697926465');
+});
 
 module.exports = app;
+
+// athentification code: https://superheroapi.com/api/108832697926465
