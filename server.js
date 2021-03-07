@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config()
 
 const express = require('express');
 var cookieParser = require('cookie-parser');
@@ -8,6 +8,7 @@ const app = express();
 
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+const exphbs  = require('express-handlebars');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -15,9 +16,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
 
-// Routes
-const authRoute = require('./controllers/auth.js')
-require('./data/db');
+app.use(express.static('public'))
+
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
 
 var checkAuth = (req, res, next) => {
   console.log("Checking authentication");
@@ -33,12 +35,14 @@ var checkAuth = (req, res, next) => {
 };
 app.use(checkAuth);
 
-
 // TODO: Add each controller here, after all middleware is initialized.
+require('./controllers/auth.js')(app);
+require('./data/db');
 
-
-app.listen(3000, () => {
-    console.log('API listening on port http://localhost:3000!');
-  });
+if (require.main === module) {
+    app.listen(process.env.PORT, () => {
+        console.log(`Listening at http://localhost:${process.env.PORT}`)
+    });
+}
 
 module.exports = app;
