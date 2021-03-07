@@ -38,10 +38,7 @@ app.use(checkAuth);
 
 
 app.listen(3000, () => {
-  console.log('API listening on port http://localhost:3000!');
-  console.log('API listening on port https://superheroapi.com/api/108832697926465');
-});
+    console.log('API listening on port http://localhost:3000!');
+  });
 
 module.exports = app;
-
-// athentification code: https://superheroapi.com/api/108832697926465
