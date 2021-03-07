@@ -1,10 +1,28 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
+const pages = [,"/favourites","/quiz","/result"]
 
 module.exports = (app) => {
    // TODO: Implement authentication controller.
    app.get("/", (req, res) => {
-      res.render("landpage");
+      var currentUser = req.user;
+      res.render("landpage", {currentUser});
+   });
+   
+   app.get("/superhero", (req, res) => {
+      res.render("superhero");
+   });
+
+   app.get("/favourites", (req, res) => {
+      res.render("favourites");
+   });
+
+   app.get("/quiz", (req, res) => {
+      res.render("quiz");
+   });
+
+   app.get("/result", (req, res) => {
+      res.render("quiz");
    });
 
    // LOGIN FORM

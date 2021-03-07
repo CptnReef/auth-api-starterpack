@@ -4,7 +4,7 @@ assert = require("assert");
 
 // connect to mongo db
 const mongoUri = process.env.MONGODB_URI
-const url = `mongodb://localhost/${mongoUri}`;
+const url = `mongodb://superheroapi.com/api/108832697926465`;
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
