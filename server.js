@@ -39,6 +39,8 @@ app.use(checkAuth);
 require('./controllers/auth.js')(app);
 require('./data/db');
 
+app.use(express.json());
+
 if (require.main === module) {
     app.listen(process.env.PORT, () => {
         console.log(`Listening at http://localhost:${process.env.PORT}`)

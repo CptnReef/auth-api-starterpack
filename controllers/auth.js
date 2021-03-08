@@ -1,14 +1,29 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
-const pages = [,"/favourites","/quiz","/result"]
+const express = require("express")
+const router = express.Router()
 
 module.exports = (app) => {
    // TODO: Implement authentication controller.
-   app.get("/", (req, res) => {
+   // CRUD
+
+
+   app.get("/", async (req, res) => {
       var currentUser = req.user;
-      res.render("landpage", {currentUser});
+      try {
+         const hero = await User.find()
+         res.render("landpage", {currentUser});
+         res.json(hero)
+      } catch(err) {
+         res.status(500).json({ message: err.message })
+
+      }
    });
-   
+
+   app.get("/:id", getHero, (req,res) => {
+      res.send(res.hero.id);
+   })
+
    app.get("/superhero", (req, res) => {
       res.render("superhero");
    });
@@ -40,11 +55,6 @@ module.exports = (app) => {
    app.get("/logout", (req, res) => {
       res.clearCookie("nToken");
       res.redirect("/");
-   });
-
- 
-   app.post("/", (req, res) => {
-      res.send("Received a POST HTTP method");
    });
 
    // LOGIN
@@ -103,7 +113,20 @@ module.exports = (app) => {
    });
    
    app.all("*", (req, res) => {
-      res.send("You've tried reaching a route that doesn't exist.")
+      res.redirect("/")
    });
 
-  }
+   async function getHero(req, res, next) {
+      let hero
+      try {
+         hero = await User.findById(req.params.id)
+         if (hero == null) {
+            return res.status(404).json({ message: "Can't find hero"})
+         }
+      } catch (err) {
+         return res.status(500).json({message: err.message})
+      }
+      res.hero = hero
+      next()
+   }
+}

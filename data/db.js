@@ -1,14 +1,14 @@
 // TODO: Set up your Mongoose connection here.
+require('dotenv').config();
 const mongoose = require('mongoose');
+const app = require('../server');
 assert = require("assert");
 
 // connect to mongo db
-const mongoUri = process.env.MONGODB_URI
-const url = `mongodb://superheroapi.com/api/108832697926465`;
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
-    url,
+    process.env.DATABASE_URL,
     { 
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -18,11 +18,14 @@ mongoose.connect(
     function(err, db) {
         assert.equal(null, err);
         console.log(`Connected successfully to database`);
-        db.close(); //turn on for testing
+        // db.close(); //turn on for testing
     }
 );
+const db = mongoose.connection;
 
-mongoose.connection.on("error", console.error.bind(console, "MongoDB connection Error:"));
+db.on("error", console.error.bind(console, "MongoDB connection Error:"));
+db.once("open", () => console.log('Connected to Database'));
+
 mongoose.set("debug", true);
 
 module.exports = mongoose.connection

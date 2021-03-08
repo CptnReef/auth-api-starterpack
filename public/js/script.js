@@ -4,7 +4,7 @@ var favContainer = document.getElementById("favs");
 for (i in favs) {
     var id = favs[i];
 
-    var url = "http://cors-anywhere.herokuapp.com/https://superheroapi.com/api/108832697926465" + id;
+    var url = "mongodb://superheroapi.com/api/108832697926465" + id;
     // var url = "http://cors-anywhere.herokuapp.com/https://superheroapi.com/api/3195255593905641" + id;
 
     $.get(url, function(hero) {
