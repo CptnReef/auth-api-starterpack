@@ -10,8 +10,8 @@ module.exports = (app) => {
 
    app.get("/", (req, res) => {
       var currentUser = req.user;
-      const access_token = 108832697926465
-      console.log(`https://superheroapi.com/api/${access_token}/search/`)
+      // const access_token = 108832697926465
+      // console.log(`https://superheroapi.com/api.php/${access_token}/`)
       return res.render("landpage", {currentUser});
    });
 
