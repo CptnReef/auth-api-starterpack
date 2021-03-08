@@ -1,9 +1,8 @@
-// Get API
+const access_token = 108832697926465
 
 const newParams = new URLSearchParams(window.location.search);
 const name = newParams.get("mySuperHero");
-var url = "mongodb://superheroapi.com/api/108832697926465" + name;
-// var url = "http://cors-anywhere.herokuapp.com/https://superheroapi.com/api/3195255593905641" + name;
+var url = `https://superheroapi.com/api/${access_token}/search` + name;
 
 var hero;
 

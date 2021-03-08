@@ -1,10 +1,12 @@
+const access_token = 108832697926465
+
 var favs = JSON.parse(localStorage.getItem("favs") || "[]");
 var favContainer = document.getElementById("favs");
 
 for (i in favs) {
     var id = favs[i];
 
-    var url = "mongodb://superheroapi.com/api/108832697926465" + id;
+    var url = `https://superheroapi.com/api/${access_token}/search` + id;
 
     $.get(url, function(hero) {
         var heroDive = document.createElement("div");

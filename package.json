@@ -21,7 +21,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.19",
-    "mongoose-schema-jsonschema": "^1.4.4"
+    "mongoose-schema-jsonschema": "^1.4.4",
+    "php": "^1.0.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

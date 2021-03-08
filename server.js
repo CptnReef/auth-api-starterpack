@@ -43,7 +43,7 @@ app.use(express.json());
 
 if (require.main === module) {
     app.listen(process.env.PORT, () => {
-        console.log(`Listening at http://localhost:${process.env.PORT}`)
+        console.log(`Listening at http://localhost:${process.env.PORT} `)
     });
 }
 

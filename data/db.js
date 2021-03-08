@@ -21,10 +21,9 @@ mongoose.connect(
         // db.close(); //turn on for testing
     }
 );
-const db = mongoose.connection;
 
-db.on("error", console.error.bind(console, "MongoDB connection Error:"));
-db.once("open", () => console.log('Connected to Database'));
+mongoose.connection.on("error", console.error.bind(console, "MongoDB connection Error:"));
+mongoose.connection.once("open", () => console.log('Connected to Database'));
 
 mongoose.set("debug", true);
 

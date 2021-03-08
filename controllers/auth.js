@@ -8,53 +8,44 @@ module.exports = (app) => {
    // CRUD
 
 
-   app.get("/", async (req, res) => {
+   app.get("/", (req, res) => {
       var currentUser = req.user;
-      try {
-         const hero = await User.find()
-         res.render("landpage", {currentUser});
-         res.json(hero)
-      } catch(err) {
-         res.status(500).json({ message: err.message })
-
-      }
+      const access_token = 108832697926465
+      console.log(`https://superheroapi.com/api/${access_token}/search/`)
+      return res.render("landpage", {currentUser});
    });
 
-   app.get("/:id", getHero, (req,res) => {
-      res.send(res.hero.id);
-   })
-
    app.get("/superhero", (req, res) => {
-      res.render("superhero");
+      return res.render("superhero");
    });
 
    app.get("/favourites", (req, res) => {
-      res.render("favourites");
+      return res.render("favourites");
    });
 
    app.get("/quiz", (req, res) => {
-      res.render("quiz");
+      return res.render("quiz");
    });
 
-   app.get("/result", (req, res) => {
-      res.render("quiz");
+   app.get("/results", (req, res) => {
+      return res.render("results");
    });
 
    // LOGIN FORM
    app.get("/login", (req, res) => {
-      res.render("login");
+      return res.render("login");
    });
 
    // SIGN UP FORM
    app.get("/sign-up", (req, res) => {
       var currentUser = req.user;
-      res.render("sign-up", { currentUser });
+      return res.render("sign-up", { currentUser });
    });
 
    // LOGOUT
    app.get("/logout", (req, res) => {
       res.clearCookie("nToken");
-      res.redirect("/");
+      return res.redirect("/");
    });
 
    // LOGIN
@@ -105,28 +96,14 @@ module.exports = (app) => {
    });
 
    app.put("/", (req, res) => {
-      res.send("Received a PUT HTTP method");
+      return res.send("Received a PUT HTTP method");
    });
    
    app.delete("/", (req, res) => {
-      res.send("Received a DELETE HTTP method");
+      return res.send("Received a DELETE HTTP method");
    });
    
    app.all("*", (req, res) => {
-      res.redirect("/")
+      return res.redirect("/")
    });
-
-   async function getHero(req, res, next) {
-      let hero
-      try {
-         hero = await User.findById(req.params.id)
-         if (hero == null) {
-            return res.status(404).json({ message: "Can't find hero"})
-         }
-      } catch (err) {
-         return res.status(500).json({message: err.message})
-      }
-      res.hero = hero
-      next()
-   }
 }
